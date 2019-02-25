@@ -1,4 +1,4 @@
-[![Hex.pm](https://img.shields.io/hexpm/v/ptv.svg)](https://hex.pm/packages/ptv) [![Build Status](https://travis-ci.org/jmargenberg/ptv.svg?branch=master)](https://travis-ci.org/jmargenberg/ptv) [![Coverage Status](https://coveralls.io/repos/github/jmargenberg/ptv/badge.svg?branch=master)](https://coveralls.io/github/jmargenberg/ptv?branch=master)
+[![Hex.pm](https://img.shields.io/hexpm/v/ptv.svg)](https://hex.pm/packages/ptv) [![Build Status](https://travis-ci.org/jmargenberg/elixir-ptv.svg?branch=master)](https://travis-ci.org/jmargenberg/elixir-ptv) [![Coverage Status](https://coveralls.io/repos/github/jmargenberg/elixir-ptv/badge.svg?branch=master)](https://coveralls.io/github/jmargenberg/elixir-ptv?branch=master)
 
 # Elixir PTV
 
