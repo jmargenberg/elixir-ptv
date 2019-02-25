@@ -7,14 +7,21 @@ defmodule PTV.MixProject do
       version: "0.1.0",
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+
+      # Docs
+      source_url: "https://github.com/jmargenberg/elixir-ptv",
+      docs: [extras: ["README.md"]],
+      description: "API adaptor for version 3 of the PTV Timetable API",
+      package: package()
     ]
   end
 
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :crypto]
+      extra_applications: []
     ]
   end
 
@@ -26,6 +33,13 @@ defmodule PTV.MixProject do
       {:httpoison, "~> 1.4"},
       {:ex_doc, "~> 0.18"},
       {:excoveralls, "~> 0.10", only: :test}
+    ]
+  end
+
+  def package do
+    [
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/jmargenberg/elixir-ptv"}
     ]
   end
 end
