@@ -3,8 +3,11 @@ defmodule PTV do
   API adaptor for the PTV Timetable API
   """
 
-  alias PTV.Call
+  @doc """
+  Generates signed url for an API call.
 
+  Builds request url and calculates hashmac digest for authentication according to instructions at https://www.ptv.vic.gov.au/footer/data-and-reporting/datasets/ptv-timetable-api/.
+  """
   def signed_call_url(
         %{
           base_url: base_url,
@@ -33,6 +36,30 @@ defmodule PTV do
     "#{base_url}#{request_message}&signature=#{hmac_digest}"
   end
 
+  @doc """
+  Executes HTTP request to API for an API call.
+
+  Returns `{:ok, response_map}` on successful response.
+
+  Returns `{:error, {:reason_atom, message_string}}` on erronous response where :reason_atom is one of the following:
+  - :invalid_request
+  - :access_denied
+  - :connection_failed
+  - :decode_failed
+
+  ## Examples
+  ```
+    iex> PTV.execute_call(%PTV.Call{
+    ...>                    api_name: "stops",
+    ...>                    search_string: "10/route_type/3",
+    ...>                    params: %{stop_amenities: true}
+    ...>                  },
+    ...>                "1234567",
+    ...>                "12345678901234567890"
+    ...>              )
+    {:ok, %{"stop" => %{}, "stop" => %{}""status" => %{}}}
+  ```
+  """
   def execute_call(call, devid, api_key) do
     case call |> signed_call_url(devid, api_key) |> HTTPoison.get() do
       {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->

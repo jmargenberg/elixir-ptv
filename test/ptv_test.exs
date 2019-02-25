@@ -1,6 +1,5 @@
 defmodule PTVTest do
   use ExUnit.Case
-  doctest PTV
 
   alias PTV.Call
 

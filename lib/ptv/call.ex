@@ -1,8 +1,14 @@
 defmodule PTV.Call do
   @moduledoc """
-  Basic support for building calls and generating signed urls.
+  Struct representing a call to the PTV API.
 
-  Strictly conforms to spec at https://timetableapi.ptv.vic.gov.au/swagger/ui/index
+  Strictly conforms to spec at https://timetableapi.ptv.vic.gov.au/swagger/ui/index.
+
+  * `:base_url`: the base url of the API server, defaults to `"http://timetableapi.ptv.vic.gov.au"`.
+  * `:api_version`: the version of the api being called, defaults to `"v3"`.
+  * `:api_name`: the name of the resource being called, .e.g. `"stops"`.
+  * `:search_string`: id or further path of the resource being called, .e.g `"10/route_type/3"`
+  * `:params`: map of query paramters, .e.g `%{stop_amenities: true}`
   """
 
   @ptv_base_url "http://timetableapi.ptv.vic.gov.au"
