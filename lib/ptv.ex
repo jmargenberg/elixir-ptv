@@ -1,6 +1,6 @@
 defmodule PTV do
   @moduledoc """
-  Documentation for PTV.
+  API adaptor for the PTV Timetable API
   """
 
   @doc """
