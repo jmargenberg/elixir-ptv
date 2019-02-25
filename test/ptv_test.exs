@@ -1,6 +1,7 @@
 defmodule PTVTest do
   use ExUnit.Case
 
+  alias Plug.Conn
   alias PTV.Call
 
   describe "signed call url " do
@@ -28,7 +29,7 @@ defmodule PTVTest do
       response = %{"stops" => [1, 2, 3], "status" => %{"version" => "3.0", "health" => 1}}
 
       Bypass.expect(bypass, fn conn ->
-        Plug.Conn.resp(conn, 200, Poison.encode!(response))
+        Conn.resp(conn, 200, Poison.encode!(response))
       end)
 
       assert {:ok, ^response} =
@@ -50,7 +51,7 @@ defmodule PTVTest do
       }
 
       Bypass.expect(bypass, fn conn ->
-        Plug.Conn.resp(conn, 400, Poison.encode!(response))
+        Conn.resp(conn, 400, Poison.encode!(response))
       end)
 
       assert {:error, {:invalid_request, "stop 10 doesn't exist"}} =
@@ -72,7 +73,7 @@ defmodule PTVTest do
       }
 
       Bypass.expect(bypass, fn conn ->
-        Plug.Conn.resp(conn, 403, Poison.encode!(response))
+        Conn.resp(conn, 403, Poison.encode!(response))
       end)
 
       assert {:error, {:access_denied, "devid doesn't exist"}} =
@@ -89,7 +90,7 @@ defmodule PTVTest do
 
     test "returns :decode_failed error if invalid json received", %{bypass: bypass} do
       Bypass.expect(bypass, fn conn ->
-        Plug.Conn.resp(conn, 200, "{nonsense: json")
+        Conn.resp(conn, 200, "{nonsense: json")
       end)
 
       assert {:error, {:decode_failed, _}} =

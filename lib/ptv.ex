@@ -31,7 +31,9 @@ defmodule PTV do
 
     request_message = "/#{api_version}/#{api_name}/#{search_string}?#{query_string}"
 
-    hmac_digest = :crypto.hmac(:sha, api_key, request_message) |> Base.encode16()
+    hmac_digest =
+      :crypto.hmac(:sha, api_key, request_message)
+      |> Base.encode16()
 
     "#{base_url}#{request_message}&signature=#{hmac_digest}"
   end
